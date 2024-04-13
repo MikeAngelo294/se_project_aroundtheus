@@ -1,0 +1,11 @@
+.footer {
+  margin: 67px auto 60px;
+  max-width: 880px;
+  width: 100%;
+}
+
+.footer__copyright {
+  width: 318px;
+  height: 18px;
+  color: #545454;
+}
