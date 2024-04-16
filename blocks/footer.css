@@ -8,4 +8,25 @@
   width: 318px;
   height: 18px;
   color: #545454;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 320px) {
+  .footer {
+    max-width: 282px;
+    margin: 0;
+    padding-left: 19px;
+    padding-top: 48px;
+    padding-bottom: 36px;
+  }
+
+  .footer__copyright {
+    width: 282px;
+    height: 14px;
+
+    font-size: 14px;
+    line-height: 17px;
+  }
 }
