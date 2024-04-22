@@ -10,7 +10,8 @@
 
 This project is the beginning of implementing responsive designs and using media queries. Media queries ensure the webpage runs smoothly across all devices with different screen resolutions. The original Figma webpage was given beforehand; therefore, the layouts for desktop and mobile are seen to be implemented into HTML and CSS code blocks. BEM methodology is also appropriately used to ensure the coding process is as efficient and coherent as possible.
 
-- [Link to webpage on Github]https://mikeangelo294.github.io/se_project_aroundtheus/
+- [Link to webpage on Github](https://mikeangelo294.github.io/se_project_aroundtheus/)
+- [Link to Project Overview Vid](https://drive.google.com/file/d/119EkprLUqh6isl0tNtyXJ-duOplpBOTU/view?usp=sharing)
 
 **Figma**
 
