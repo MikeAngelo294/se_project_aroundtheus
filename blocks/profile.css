@@ -20,6 +20,7 @@
   margin-left: 18px;
   margin-top: 15px;
   border: 1px solid white;
+  transition: ease-in 0.3s;
 }
 
 .profile__edit-button:hover {
@@ -34,6 +35,7 @@
   margin-left: auto;
   border: 2px solid white;
   border-radius: 2px;
+  transition: ease-in 0.3s;
 }
 
 .profile__add-button:hover {
@@ -51,10 +53,12 @@
   padding-bottom: 7px;
   text-overflow: ellipsis;
   white-space: nowrap;
+  overflow: hidden;
   font-family: Inter, Arial, sans-serif;
 }
 
 .profile__description {
+  max-width: 415px;
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
@@ -87,9 +91,7 @@
 
   .profile__title {
     text-align: center;
-
-    width: 196px;
-
+    max-width: 196px;
     line-height: 26px;
     font-size: 22px;
     padding-top: 30px;
