@@ -20,7 +20,7 @@
   margin-left: 18px;
   margin-top: 15px;
   border: 1px solid white;
-  transition: ease-in 0.3s;
+  transition: ease-in 0.2s;
 }
 
 .profile__edit-button:hover {
