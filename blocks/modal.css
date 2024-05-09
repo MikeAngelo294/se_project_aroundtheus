@@ -9,7 +9,7 @@
   display: none;
 }
 
-.modal__opened {
+.modal_opened {
   display: flex;
 }
 
@@ -57,7 +57,7 @@
   flex-direction: column;
 }
 
-.modal__title {
+.modal__input {
   display: block;
   box-sizing: border-box;
   width: 358px;
@@ -74,22 +74,8 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.modal__description {
-  display: block;
-  box-sizing: border-box;
-  width: 358px;
-  height: 28px;
-  font-family: Inter, Arial, sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  padding-bottom: 13px;
-  border-top: transparent;
-  border-left: transparent;
-  border-right: transparent;
-  border-bottom: 0.2;
-  margin-bottom: 48px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+.modal__input:last-of-type {
+  margin-bottom: 0;
 }
 
 .modal__button {
@@ -102,6 +88,7 @@
   font-size: 18px;
   line-height: 22px;
   border-radius: 2px;
+  margin-top: 48px;
   cursor: pointer;
 }
 
@@ -128,7 +115,7 @@
     padding-bottom: 75px;
   }
 
-  .modal__title {
+  .modal__input {
     width: 238px;
     height: 27px;
     font-size: 14px;
@@ -144,9 +131,10 @@
   }
 
   .modal__button {
-    width: 238px;
+    max-width: 238px;
     height: 46px;
     font-size: 14px;
     line-height: 17px;
+    margin-top: 45px;
   }
 }
