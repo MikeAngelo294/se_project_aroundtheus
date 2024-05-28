@@ -63,12 +63,6 @@ function closePopUp(modal) {
   modal.classList.remove("modal_opened");
 }
 
-/*function openPopUp() {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-  profileEditModal.classList.add("modal_opened");
-}*/
-
 //render cards
 function renderCard(cardData, wrapper) {
   const cardElement = getCardElement(cardData);
@@ -130,6 +124,7 @@ function handleAddCardFormSubmit(event) {
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListEl);
   closePopUp(addCardModal);
+  event.target.reset();
 }
 
 ///Event listeners
