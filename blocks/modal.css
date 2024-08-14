@@ -107,6 +107,7 @@
   border-right: transparent;
   margin-bottom: 30px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 0;
 }
 
 .modal__input:last-of-type {
@@ -129,6 +130,37 @@
 
 .modal__button:hover {
   opacity: 0.8;
+}
+
+.modal__error {
+  font-weight: 400;
+  left: 0;
+  line-height: 14px;
+  color: #ff0000;
+  font-family: Inter, Arial, sans-serif;
+  font-size: normal;
+  font-size: 12px;
+  visibility: hidden;
+  display: block;
+  padding-top: 5px;
+  margin-bottom: 13px;
+  width: 350px;
+  transition: opacity 0.5;
+}
+
+.modal__button_disabled {
+  color: #000;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  opacity: 0.2;
+  background-color: transparent;
+}
+
+.modal__input_type_error {
+  border-bottom: 1px solid #ff0000;
+}
+
+.modal__error_visible {
+  visibility: visible;
 }
 
 @media screen and (max-width: 720px) {
