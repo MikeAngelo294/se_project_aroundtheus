@@ -29,8 +29,6 @@ const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
 
-const popups = document.querySelectorAll(".modal");
-
 const cardListEl = document.querySelector("#cards__list-container");
 
 const cardsWrap = document.querySelector(".cards__list");
@@ -63,13 +61,7 @@ const cardUrlInput = document.querySelector(".modal__input_type_url");
 ///close modal
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", clickEscape);
-}
-
-//render cards
-function renderCard(cardData, wrapper) {
-  const cardElement = getCardElement(cardData);
-  wrapper.prepend(cardElement);
+  document.addEventListener("keydown", clickEscape);
 }
 
 ///open modal
@@ -79,19 +71,26 @@ function openPopUp(modal) {
   modal.addEventListener("mousedown", overlayEscape);
 }
 
-//closing popup with escape
-function clickEscape(evt) {
-  if (evt.key === "Escape" || evt.key === "Esc") {
-    document.querrySelectorAll("modal_opened").foreach(closePopUp);
+//render cards
+function renderCard(cardData, wrapper) {
+  const cardElement = getCardElement(cardData);
+  wrapper.prepend(cardElement);
+}
+
+//closing popup with escape and overlay
+function clickEscape(event) {
+  if (event.key === "Escape") {
+    const openModal = document.querySelector(".modal_opened");
+    closePopUp(openModal);
   }
 }
 
-function overlayEscape(evt) {
+function overlayEscape(event) {
   if (
-    evt.target === evt.currentTarget ||
-    evt.target.classList.contains("modal__close")
+    event.target === event.currentTarget ||
+    event.target.classList.contains("modal__close")
   ) {
-    closePopUp(evt.currentTarget);
+    closePopUp(event.currentTarget);
   }
 }
 
@@ -164,17 +163,6 @@ profileModalCloseButton.addEventListener("click", () =>
 previewModalCloseButton.addEventListener("click", () =>
   closePopUp(previewModal)
 );
-
-popups.forEach((popup) => {
-  popup.addEventListener("keydown", (evt) => {
-    if (evt.target.classList.contains("modal_opened")) {
-      closePopUp(popup);
-    }
-    if (evt.target.classList.contains("modal_close")) {
-      closePopUp(popup);
-    }
-  });
-});
 
 //add new card listener button
 addNewCardButton.addEventListener("click", () => openPopUp(addCardModal));
