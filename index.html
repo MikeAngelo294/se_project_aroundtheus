@@ -48,31 +48,35 @@
         <button class="modal__close" id="modal-close-button"></button>
         <p class="modal__heading">Edit profile</p>
         <form class="modal__form">
-          <input
-            type="text"
-            name="title"
-            class="modal__input"
-            placeholder="Name"
-            id="profile-title-input"
-            minlength="2"
-            maxlength="40"
-            required
-          />
-          <span class="modal__error" id="profile-title-input-error"></span>
-          <input
-            type="text"
-            name="description"
-            class="modal__input"
-            placeholder="Description"
-            id="profile-description-input"
-            minlength="2"
-            maxlength="200"
-            required
-          />
-          <span
-            class="modal__error"
-            id="profile-description-input-error"
-          ></span>
+          <label class="modal__label">
+            <input
+              type="text"
+              name="title"
+              class="modal__input"
+              placeholder="Name"
+              id="profile-title-input"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span class="modal__error" id="profile-title-input-error"></span>
+          </label>
+          <label class="modal__label">
+            <input
+              type="text"
+              name="description"
+              class="modal__input"
+              placeholder="Description"
+              id="profile-description-input"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span
+              class="modal__error"
+              id="profile-description-input-error"
+            ></span>
+          </label>
           <button
             class="modal__button modal__button_disabled"
             type="submit"
@@ -89,26 +93,30 @@
         <button class="modal__close" id="modal-close-button"></button>
         <p class="modal__heading">New Place</p>
         <form class="modal__form" id="add-card-form">
-          <input
-            type="text"
-            name="title"
-            class="modal__input modal__input_type_title"
-            placeholder="Title"
-            id="card-title-input"
-            minlength="2"
-            maxlength="40"
-            required
-          />
-          <span class="modal__error" id="card-title-input-error"></span>
-          <input
-            type="text"
-            name="url"
-            class="modal__input modal__input_type_url"
-            placeholder="Image URL"
-            id="card-url-input"
-            required
-          />
-          <span class="modal__error" id="card-url-input-error"></span>
+          <label class="modal__label">
+            <input
+              type="text"
+              name="title"
+              class="modal__input modal__input_type_title"
+              placeholder="Title"
+              id="card-title-input"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span class="modal__error" id="card-title-input-error"></span>
+          </label>
+          <label class="modal__label">
+            <input
+              type="text"
+              name="url"
+              class="modal__input modal__input_type_url"
+              placeholder="Image URL"
+              id="card-url-input"
+              required
+            />
+            <span class="modal__error" id="card-url-input-error"></span>
+          </label>
           <button
             class="modal__button modal__button_disabled"
             type="submit"

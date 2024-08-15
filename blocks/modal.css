@@ -9,6 +9,8 @@
   opacity: 0;
   display: flex;
   visibility: hidden;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal_opened {
@@ -42,6 +44,7 @@
   padding: 36px;
   margin: auto;
   border-radius: 10px;
+  max-width: 430px;
 }
 
 .modal__container_image {
@@ -62,8 +65,8 @@
   cursor: pointer;
   width: 40px;
   height: 40px;
-  top: -45px;
-  right: -45px;
+  left: calc(100% + 5px);
+  bottom: calc(100% + 5px);
   background-image: url(../images/Close\ Icon.svg);
   border: none;
   background-repeat: no-repeat;
@@ -75,27 +78,25 @@
 }
 
 .modal__heading {
-  width: 330px;
-  height: 23px;
+  max-width: 330px;
   color: black;
   margin-top: 0;
   margin-bottom: 0;
   font-family: Inter, Arial, sans-serif;
-  font-weight: 900;
+  font-weight: bold;
   font-size: 24px;
   line-height: 29px;
-  padding-bottom: 54px;
 }
 
 .modal__form {
-  display: flex;
-  flex-direction: column;
+  width: 380px;
+  display: grid;
+  margin-top: 54px;
 }
-
 .modal__input {
   display: block;
   box-sizing: border-box;
-  width: 358px;
+  width: 100%;
   height: 28px;
   font-family: Inter, Arial, sans-serif;
   font-weight: 400;
@@ -109,13 +110,16 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.modal__input:last-of-type {
+.modal__label {
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.modal__label:last-of-type {
   margin-top: 30px;
-  margin-bottom: 0;
 }
 
 .modal__button {
-  width: 358px;
   height: 50px;
   background-color: black;
   color: white;
@@ -141,11 +145,10 @@
   font-size: normal;
   font-size: 12px;
   visibility: hidden;
-  display: block;
+  position: absolute;
 
   width: 250px;
   transition: opacity 0.5;
-  display: block;
 }
 
 .modal__button_disabled {
@@ -157,7 +160,7 @@
 
 .modal__input_type_error {
   border-bottom: 1px solid #ff0000;
-  margin-top: 0;
+  width: 100%;
 }
 
 .modal__error_visible {
@@ -176,19 +179,26 @@
     padding: 25px 22px;
   }
 
+  .modal__form {
+    max-width: 238px;
+    margin: 0;
+  }
+  .modal__form-input {
+    max-width: 238px;
+  }
+
   .modal__close {
     width: 26px;
     height: 26px;
-    right: 8px;
+    right: 0;
+    left: unset;
+    top: -50px;
   }
 
   .modal__heading {
-    width: 238px;
-    height: 27px;
     font-size: 18px;
     line-height: 22px;
-    padding-bottom: 75px;
-    font-weight: 900px;
+    margin-bottom: 75px;
   }
 
   .modal__input {
@@ -222,9 +232,5 @@
   .modal__close-image {
     top: -5px;
     margin-right: -15px;
-  }
-  .modal__error {
-    display: flex;
-    justify-content: center;
   }
 }
