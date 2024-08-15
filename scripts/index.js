@@ -61,14 +61,14 @@ const cardUrlInput = document.querySelector(".modal__input_type_url");
 ///close modal
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
-  document.addEventListener("keydown", clickEscape);
+  document.removeEventListener("keydown", handleEscape);
 }
 
 ///open modal
 function openPopUp(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", clickEscape);
-  modal.addEventListener("mousedown", overlayEscape);
+  document.addEventListener("keydown", handleEscape);
+  modal.addEventListener("mousedown", handleModalClose);
 }
 
 //render cards
@@ -78,14 +78,14 @@ function renderCard(cardData, wrapper) {
 }
 
 //closing popup with escape and overlay
-function clickEscape(event) {
+function handleEscape(event) {
   if (event.key === "Escape") {
     const openModal = document.querySelector(".modal_opened");
     closePopUp(openModal);
   }
 }
 
-function overlayEscape(event) {
+function handleModalClose(event) {
   if (
     event.target === event.currentTarget ||
     event.target.classList.contains("modal__close")
@@ -156,9 +156,9 @@ profileEditButton.addEventListener("click", () => {
   profileDescriptionInput.value = profileDescription.textContent;
   openPopUp(profileEditModal);
 });
-profileModalCloseButton.addEventListener("click", () =>
-  closePopUp(profileEditModal)
-);
+//profileModalCloseButton.addEventListener("click", () =>
+//closePopUp(profileEditModal)
+//);
 
 previewModalCloseButton.addEventListener("click", () =>
   closePopUp(previewModal)
