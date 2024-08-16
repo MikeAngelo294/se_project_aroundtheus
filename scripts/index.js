@@ -167,8 +167,8 @@ profileEditButton.addEventListener("click", () => {
 
 //add new card listener button
 addNewCardButton.addEventListener("click", () => openPopUp(addCardModal));
-addCardModalCloseButton.addEventListener("click", () =>
-  closePopUp(addCardModal)
-);
+///addCardModalCloseButton.addEventListener("click", () =>
+closePopUp(addCardModal);
+///);
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));

@@ -112,11 +112,7 @@
 
 .modal__label {
   position: relative;
-  padding-bottom: 20px;
-}
-
-.modal__label:last-of-type {
-  margin-top: 30px;
+  padding-bottom: 35px;
 }
 
 .modal__button {
@@ -128,7 +124,7 @@
   font-size: 18px;
   line-height: 22px;
   border-radius: 2px;
-  margin-top: 48px;
+  margin-top: 28px;
   cursor: pointer;
 }
 
