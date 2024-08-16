@@ -62,6 +62,7 @@ const cardUrlInput = document.querySelector(".modal__input_type_url");
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscape);
+  modal.removeEventListener("mousedown", handleModalClose);
 }
 
 ///open modal
@@ -160,9 +161,9 @@ profileEditButton.addEventListener("click", () => {
 //closePopUp(profileEditModal)
 //);
 
-previewModalCloseButton.addEventListener("click", () =>
-  closePopUp(previewModal)
-);
+///previewModalCloseButton.addEventListener("click", () =>
+///closePopUp(previewModal)
+///);
 
 //add new card listener button
 addNewCardButton.addEventListener("click", () => openPopUp(addCardModal));
