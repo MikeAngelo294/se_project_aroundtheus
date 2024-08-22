@@ -47,15 +47,6 @@ const validationConfig = {
   errorClass: "modal__error_visible",
 };
 
-const editValidator = new FormValidator(validationConfig, profileEditForm);
-editValidator.enableValidation();
-
-const cardAddValidator = new FormValidator(
-  validationConfig,
-  addCardFormElement
-);
-cardAddValidator.enableValidation();
-
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 const cardSelector = "#card-template";
@@ -86,6 +77,15 @@ const profileDescriptionInput = document.querySelector(
 );
 const cardTitleInput = document.querySelector(".modal__input_type_title");
 const cardUrlInput = addCardFormElement.querySelector(".modal__input_type_url");
+
+const editValidator = new FormValidator(validationConfig, profileEditForm);
+editValidator.enableValidation();
+
+const cardAddValidator = new FormValidator(
+  validationConfig,
+  addCardFormElement
+);
+cardAddValidator.enableValidation();
 
 ///close modal
 function closePopUp(modal) {
