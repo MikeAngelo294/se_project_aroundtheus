@@ -1,3 +1,7 @@
+import Card from "../components/Card.js";
+
+import FormValidator from "../components/FormValidator.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -25,12 +29,37 @@ const initialCards = [
   },
 ];
 
-const cardTemplate = document
+const cardData = {
+  name: "Yosemite Valley",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+};
+
+/*const cardTemplate = document
   .querySelector("#card-template")
-  .content.querySelector(".card");
+  .content.querySelector(".card");*/
 
+const validationConfig = {
+  ///formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const editValidator = new FormValidator(validationConfig, profileEditForm);
+editValidator.enableValidation();
+
+const cardAddValidator = new FormValidator(
+  validationConfig,
+  addCardFormElement
+);
+cardAddValidator.enableValidation();
+
+const cardTemplate =
+  document.querySelector("#card-template").content.firstElementChild;
+const cardSelector = "#card-template";
 const cardListEl = document.querySelector("#cards__list-container");
-
 const cardsWrap = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const addCardModal = document.querySelector("#add-card-modal");
@@ -56,7 +85,7 @@ const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
 const cardTitleInput = document.querySelector(".modal__input_type_title");
-const cardUrlInput = document.querySelector(".modal__input_type_url");
+const cardUrlInput = addCardFormElement.querySelector(".modal__input_type_url");
 
 ///close modal
 function closePopUp(modal) {
@@ -72,10 +101,17 @@ function openPopUp(modal) {
   modal.addEventListener("mousedown", handleModalClose);
 }
 
-//render cards
-function renderCard(cardData, wrapper) {
-  const cardElement = getCardElement(cardData);
-  wrapper.prepend(cardElement);
+//render cards including Handle, template,view
+function renderCard(cardData, cardListEl) {
+  const card = new Card(cardData, "#card-template", handleImageClick);
+  /*const card = new Card(
+    { name: cardData.name, link: cardData.link },
+    "#card-template",
+    handleImageClick
+  );*/
+  cardListEl.prepend(card.getView());
+  /*const cardElemenet = card.getView();
+  wrapper.prepend(cardElemenet);*/
 }
 
 //closing popup with escape and overlay
@@ -95,21 +131,21 @@ function handleModalClose(event) {
   }
 }
 
-function getCardElement(cardData) {
+/*function getCardElement(cardData) {
   //clone the template element with all its content and store it in a cardElement variable
   const cardElement = cardTemplate.cloneNode(true);
   //access the card title and image and store them in variables
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__label");
   const likeButton = cardElement.querySelector(".card__like-button");
-  ///FIND DELETE BUTTON
+  //FIND DELETE BUTTON
   const deleteButton = cardElement.querySelector(".card__delete-button");
-  ///ADD EVENT LISTENR TO DELETE BUTTON & cardElement.remove();
+  //ADD EVENT LISTENR TO DELETE BUTTON & cardElement.remove();
   deleteButton.addEventListener("click", () => {
     cardElement.remove();
   });
 
-  ///add click listener to cardImage element & open with previewImage Modal & close
+  //add click listener to cardImage element & open with previewImage Modal & close
   cardImageEl.addEventListener("click", () => {
     previewImageElement.src = cardData.link;
     previewImageElement.alt = cardData.name;
@@ -130,6 +166,14 @@ function getCardElement(cardData) {
   //return the ready HTML element with the filled-in data
 
   return cardElement;
+}*/
+
+///establish handleImageClick
+function handleImageClick(name, link) {
+  previewImageElement.src = cardData.link;
+  previewImageElement.alt = cardData.name;
+  previewImageTitle.textContent = cardData.name;
+  openPopUp(previewModal);
 }
 
 function handleProfileEditSubmit(event) {
@@ -146,6 +190,7 @@ function handleAddCardFormSubmit(event) {
   renderCard({ name, link }, cardListEl);
   closePopUp(addCardModal);
   event.target.reset();
+  //cardAddValidator.resetFormValidation();
 }
 
 ///Event listeners
