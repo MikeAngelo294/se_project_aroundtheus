@@ -34,10 +34,6 @@ const cardData = {
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
 
-/*const cardTemplate = document
-  .querySelector("#card-template")
-  .content.querySelector(".card");*/
-
 const validationConfig = {
   ///formSelector: ".modal__form",
   inputSelector: ".modal__input",
@@ -102,16 +98,15 @@ function openPopUp(modal) {
 }
 
 //render cards including Handle, template,view
+
+function createCard(item) {
+  const card = new Card(item, "#card-template", handleImageClick);
+  return card.getView();
+}
+
 function renderCard(cardData, cardListEl) {
-  const card = new Card(cardData, "#card-template", handleImageClick);
-  /*const card = new Card(
-    { name: cardData.name, link: cardData.link },
-    "#card-template",
-    handleImageClick
-  );*/
-  cardListEl.prepend(card.getView());
-  /*const cardElemenet = card.getView();
-  wrapper.prepend(cardElemenet);*/
+  const card = createCard(cardData);
+  cardListEl.prepend(card);
 }
 
 //closing popup with escape and overlay
@@ -131,45 +126,8 @@ function handleModalClose(event) {
   }
 }
 
-/*function getCardElement(cardData) {
-  //clone the template element with all its content and store it in a cardElement variable
-  const cardElement = cardTemplate.cloneNode(true);
-  //access the card title and image and store them in variables
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__label");
-  const likeButton = cardElement.querySelector(".card__like-button");
-  //FIND DELETE BUTTON
-  const deleteButton = cardElement.querySelector(".card__delete-button");
-  //ADD EVENT LISTENR TO DELETE BUTTON & cardElement.remove();
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  //add click listener to cardImage element & open with previewImage Modal & close
-  cardImageEl.addEventListener("click", () => {
-    previewImageElement.src = cardData.link;
-    previewImageElement.alt = cardData.name;
-    previewImageTitle.textContent = cardData.name;
-    openPopUp(previewModal);
-  });
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-
-  //set the path to the image to the link field of the object
-  cardImageEl.src = cardData.link;
-  //set the image alt text to the name field of the object
-  cardImageEl.alt = cardData.name;
-  //set the card title to the name field of the object, too
-  cardTitleEl.textContent = cardData.name;
-  //return the ready HTML element with the filled-in data
-
-  return cardElement;
-}*/
-
 ///establish handleImageClick
-function handleImageClick(name, link) {
+function handleImageClick(cardData) {
   previewImageElement.src = cardData.link;
   previewImageElement.alt = cardData.name;
   previewImageTitle.textContent = cardData.name;
@@ -191,6 +149,7 @@ function handleAddCardFormSubmit(event) {
   closePopUp(addCardModal);
   event.target.reset();
   //cardAddValidator.resetFormValidation();
+  cardAddValidator.toggleButtonState();
 }
 
 ///Event listeners
@@ -202,13 +161,6 @@ profileEditButton.addEventListener("click", () => {
   profileDescriptionInput.value = profileDescription.textContent;
   openPopUp(profileEditModal);
 });
-//profileModalCloseButton.addEventListener("click", () =>
-//closePopUp(profileEditModal)
-//);
-
-///previewModalCloseButton.addEventListener("click", () =>
-///closePopUp(previewModal)
-///);
 
 //add new card listener button
 addNewCardButton.addEventListener("click", () => openPopUp(addCardModal));
