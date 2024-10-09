@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="HTML, CSS" />
-    <link href="./pages/index.css" rel="stylesheet" />
+
     <title>Around the U.S</title>
   </head>
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
         <img
-          src="./images/logo.svg"
+          src="<%=require('./images/logo.svg')%>"
           alt="Around the US logo"
           class="header__logo"
         />
@@ -19,7 +19,7 @@
       <main class="content">
         <section class="profile page__section">
           <img
-            src="./images/jacques-cousteau.png"
+            src="<%=require('./images/jacques-cousteau.png')%>"
             alt="Avatar"
             class="profile__image"
           />
@@ -47,7 +47,7 @@
       <div class="modal__container">
         <button class="modal__close" id="modal-close-button"></button>
         <p class="modal__heading">Edit profile</p>
-        <form class="modal__form">
+        <form class="modal__form" id="edit-modal-form">
           <label class="modal__label">
             <input
               type="text"
@@ -136,8 +136,8 @@
           id="modal-close-button"
           type="button"
         ></button>
-        <p class="modal__image-title"></p>
         <img src="" alt="" class="modal__image" />
+        <p class="modal__image-title"></p>
       </div>
     </div>
 
@@ -151,7 +151,5 @@
         </div>
       </li>
     </template>
-
-    <script src="./pages/index.js" type="module"></script>
   </body>
 </html>
