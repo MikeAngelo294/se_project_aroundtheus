@@ -39,13 +39,14 @@ import { initialCards, validationConfig } from "../utils/constants.js";
     name: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
-];
+];*/
 
-/*const cardData = {
+const cardData = {
   name: "Yosemite Valley",
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
 
+/*
 const validationConfig = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
@@ -162,20 +163,14 @@ section.renderItems();
 /*                        functions                      */
 /* -------------------------------------------------------------------------- */
 
-function resetValidation(form) {
-  const formName = form.getAttribute("name");
-  formValidator[formName].resetFormValidation();
+function renderCard(item, method = "addItem") {
+  const cardElement = createCard(item);
+  section[method](cardElement);
 }
 
-//create and add card
-
-function createCard(item) {
-  const card = new Card(item, "#card-template", handleImageClick);
+function createCard(cardData) {
+  const card = new Card(cardData, "#card-template", handleImageClick);
   return card.getView();
-}
-
-function addCard(card) {
-  section.addItem(card, true);
 }
 
 ///establish handleImageClick
@@ -191,10 +186,18 @@ function handleProfileEditSubmit(inputValue) {
 }
 
 function handleAddCardFormSubmit(inputValue) {
-  const { name, link } = inputValue;
+  /*const { name, link } = inputValue;
   addCard(createCard({ name, link }));
   addModal.close();
+  addCardForm.reset();*/
+  const cardData = {
+    name: inputValue.title,
+    link: inputValue.url,
+  };
+
+  addModal.close();
   addCardForm.reset();
+  renderCard(cardData);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -208,7 +211,6 @@ profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = name;
   profileDescriptionInput.value = description;
   profileModal.open();
-  resetValidation(editModalForm);
 });
 
 //add new card listener button
