@@ -180,9 +180,13 @@ function handleImageClick(data) {
 
 //// use userInfo for handlesubmit
 function handleProfileEditSubmit(inputValue) {
-  const { name, description } = inputValue;
+  /*const { name, description } = inputValue;
   userInfo.setUserInfo({ name, description });
-  profileModal.close();
+  profileModal.close();*/
+  userInfo.setUserInfo({
+    name: inputValue.title,
+    description: inputValue.description,
+  });
 }
 
 function handleAddCardFormSubmit(inputValue) {
