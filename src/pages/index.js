@@ -14,47 +14,10 @@ import UserInfo from "../components/UserInfo.js";
 
 import { initialCards, validationConfig } from "../utils/constants.js";
 
-/*const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];*/
-
 const cardData = {
   name: "Yosemite Valley",
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
-
-/*
-const validationConfig = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};*/
 
 import {
   cardTemplate,
@@ -88,12 +51,6 @@ const addCardForm = document.forms["add-card-form"];
 /* -------------------------------------------------------------------------- */
 /*                       validation                      */
 /* -------------------------------------------------------------------------- */
-
-/*const editValidator = new FormValidator(validationConfig, editModalForm);
-editValidator.enableValidation();
-
-const cardAddValidator = new FormValidator(validationConfig, addCardForm);
-cardAddValidator.enableValidation();*/
 
 const formValidator = {};
 
@@ -141,10 +98,7 @@ const popupImage = new PopupWithImage("#preview-modal");
 const section = new Section(
   {
     items: initialCards,
-    renderer: (item) => {
-      const card = createCard(item);
-      section.addItem(card);
-    },
+    renderer: renderCard,
   },
   ".cards__list"
 );
@@ -180,9 +134,6 @@ function handleImageClick(data) {
 
 //// use userInfo for handlesubmit
 function handleProfileEditSubmit(inputValue) {
-  /*const { name, description } = inputValue;
-  userInfo.setUserInfo({ name, description });
-  profileModal.close();*/
   userInfo.setUserInfo({
     name: inputValue.title,
     description: inputValue.description,
@@ -207,8 +158,6 @@ function handleAddCardFormSubmit(inputValue) {
 /* -------------------------------------------------------------------------- */
 /*                             Event Listeners                      */
 /* -------------------------------------------------------------------------- */
-/*profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);*/
 
 profileEditButton.addEventListener("click", () => {
   const { name, description } = userInfo.getUserInfo();
@@ -223,5 +172,3 @@ addNewCardButton.addEventListener("click", () => {
 });
 
 addModal.setEventListeners();
-
-//initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
