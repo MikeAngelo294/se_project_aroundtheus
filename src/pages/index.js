@@ -141,10 +141,6 @@ function handleProfileEditSubmit(inputValue) {
 }
 
 function handleAddCardFormSubmit(inputValue) {
-  /*const { name, link } = inputValue;
-  addCard(createCard({ name, link }));
-  addModal.close();
-  addCardForm.reset();*/
   const cardData = {
     name: inputValue.title,
     link: inputValue.url,
@@ -153,6 +149,7 @@ function handleAddCardFormSubmit(inputValue) {
   addModal.close();
   addCardForm.reset();
   renderCard(cardData);
+  cardAddValidator.disableSubmitButton();
 }
 
 /* -------------------------------------------------------------------------- */
