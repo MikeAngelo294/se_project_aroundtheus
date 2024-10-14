@@ -138,6 +138,7 @@ function handleProfileEditSubmit(inputValue) {
     name: inputValue.title,
     description: inputValue.description,
   });
+  profileModal.close();
 }
 
 function handleAddCardFormSubmit(inputValue) {
@@ -146,10 +147,10 @@ function handleAddCardFormSubmit(inputValue) {
     link: inputValue.url,
   };
 
+  renderCard(cardData);
+  //cardAddValidator.disableSubmitButton();
   addModal.close();
   addCardForm.reset();
-  renderCard(cardData);
-  cardAddValidator.disableSubmitButton();
 }
 
 /* -------------------------------------------------------------------------- */
