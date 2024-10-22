@@ -74,7 +74,7 @@ const cardAddValidator = formValidator["add-card-form"];
 const editValidator = formValidator["add-card-form"];
 
 /* -------------------------------------------------------------------------- */
-/*                        component classes                      */
+/*                        component                       */
 /* -------------------------------------------------------------------------- */
 
 const profileModal = new PopupWithForm(
