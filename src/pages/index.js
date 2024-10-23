@@ -132,6 +132,7 @@ api
 const userInfo = new UserInfo({
   nameElement: ".profile__title",
   jobElement: ".profile__description",
+  avatarElement: ".profile__image",
 });
 
 api.getUserInfo().then((userData) => {
@@ -161,7 +162,7 @@ function createCard(cardData) {
   return card.getView();
 }
 
-///establish handleImageClick
+///establish handleImageClick///
 function handleImageClick(data) {
   popupImage.open({ name: data.name, link: data.link });
 }

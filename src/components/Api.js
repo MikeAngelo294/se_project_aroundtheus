@@ -51,6 +51,34 @@ export default class Api {
         link,
       }),
     }).then(this._handleResponse);
+    /*.then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      }); */
+  }
+
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+      body: JSON.stringify(url),
+    }).then(this._handleResponse);
+  }
+
+  likeCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then(this._handleResponse);
+  }
+
+  unlikeCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this._handleResponse);
   }
 
   updateUserInfo(userData) {
@@ -62,6 +90,12 @@ export default class Api {
         about: userData.description,
       }),
     }).then(this._handleResponse);
+    /*.then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      }); */
   }
 
   updateAvatar(url) {
