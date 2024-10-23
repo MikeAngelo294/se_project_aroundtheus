@@ -40,4 +40,27 @@ export default class Api {
   getAllInfo() {
     return Promise.all([this.getInitialCards(), this.getUserInfo()]);
   }
+
+  ///post cards
+  addCard({ name, link }) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        link,
+      }),
+    }).then(this._handleResponse);
+  }
+
+  updateUserInfo(userData) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: userData.title,
+        about: userData.description,
+      }),
+    }).then(this._handleResponse);
+  }
 }
