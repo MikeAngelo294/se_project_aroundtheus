@@ -43,7 +43,7 @@ export default class Api {
 
   ///post cards
   addCard({ name, link }) {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}/users/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -61,6 +61,14 @@ export default class Api {
         name: userData.title,
         about: userData.description,
       }),
+    }).then(this._handleResponse);
+  }
+
+  updateAvatar(url) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify(url),
     }).then(this._handleResponse);
   }
 }
