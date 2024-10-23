@@ -1,3 +1,5 @@
+import Api from "../components/Api.js";
+
 import Card from "../components/Card.js";
 
 import "./index.css";
@@ -12,7 +14,7 @@ import Section from "../components/Section.js";
 
 import UserInfo from "../components/UserInfo.js";
 
-import { initialCards, validationConfig } from "../utils/constants.js";
+import { /*initialCards,*/ validationConfig } from "../utils/constants.js";
 
 const cardData = {
   name: "Yosemite Valley",
@@ -77,6 +79,26 @@ const editValidator = formValidator["add-card-form"];
 /*                        component                       */
 /* -------------------------------------------------------------------------- */
 
+/*                        API                       */
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "a7d09fcd-0691-40bd-af3f-b1a6b438dcbf",
+    "Content-Type": "application/json",
+  },
+});
+
+api
+  .getInitialCards()
+  .then((cards) => {
+    section.renderItems(cards);
+  })
+  .catch((err) => {
+    console.error(err); // log the error to the console
+  });
+
+/*                        PopupWithForm                       */
 const profileModal = new PopupWithForm(
   {
     popupSelector: "#profile-edit-modal",
@@ -93,8 +115,10 @@ const addModal = new PopupWithForm(
   cardAddValidator
 );
 
+/*                        PopupWithImage                      */
 const popupImage = new PopupWithImage("#preview-modal");
 
+/*                        Section                       */
 const section = new Section(
   {
     items: initialCards,
@@ -103,15 +127,17 @@ const section = new Section(
   ".cards__list"
 );
 
+/*                        UserInfo                       */
 const userInfo = new UserInfo({
   nameElement: ".profile__title",
   jobElement: ".profile__description",
 });
 
+/*                        component EventListeners                      */
 profileModal.setEventListeners();
 
 popupImage.setEventListeners();
-section.renderItems();
+//section.renderItems();
 
 /* -------------------------------------------------------------------------- */
 /*                        functions                      */
