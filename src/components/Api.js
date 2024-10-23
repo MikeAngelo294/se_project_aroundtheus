@@ -16,11 +16,28 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     }).then(this._handleResponse);
-    /*.catch((err) => {
-        console.error(err); // log the error to the console
+    /*.then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
       });
       */
   }
 
-  // other methods for working with the API
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers,
+    }).then(this._handleResponse);
+    /*.then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      }); */
+  }
+
+  getAllInfo() {
+    return Promise.all([this.getInitialCards(), this.getUserInfo()]);
+  }
 }

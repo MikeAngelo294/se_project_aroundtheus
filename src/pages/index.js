@@ -14,7 +14,7 @@ import Section from "../components/Section.js";
 
 import UserInfo from "../components/UserInfo.js";
 
-import { /*initialCards,*/ validationConfig } from "../utils/constants.js";
+import { initialCards, validationConfig } from "../utils/constants.js";
 
 const cardData = {
   name: "Yosemite Valley",
@@ -89,15 +89,6 @@ const api = new Api({
   },
 });
 
-api
-  .getInitialCards()
-  .then((cards) => {
-    section.renderItems(cards);
-  })
-  .catch((err) => {
-    console.error(err); // log the error to the console
-  });
-
 /*                        PopupWithForm                       */
 const profileModal = new PopupWithForm(
   {
@@ -127,10 +118,27 @@ const section = new Section(
   ".cards__list"
 );
 
+//initial cards
+api
+  .getInitialCards()
+  .then((cards) => {
+    section.renderItems(cards);
+  })
+  .catch((err) => {
+    console.error(err); // log the error to the console
+  });
+
 /*                        UserInfo                       */
 const userInfo = new UserInfo({
   nameElement: ".profile__title",
   jobElement: ".profile__description",
+});
+
+api.getUserInfo().then((userData) => {
+  userInfo.setUserInfo({
+    name: userData.name,
+    description: userData.about,
+  });
 });
 
 /*                        component EventListeners                      */
