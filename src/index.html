@@ -43,6 +43,33 @@
         <p class="footer__copyright">&copy; 2022 Around The U.S.</p>
       </footer>
     </div>
+    <!--Edit Profile Modal-->
+    <div class="modal" id="profile-avatar-modal">
+      <div class="modal__container">
+        <button class="modal__close" id="avatar-close-button"></button>
+        <p class="modal__heading modal__heading_avatar">Edit profile Picture</p>
+        <form class="modal__form" id="profile-avatar-modal">
+          <label class="modal__label">
+            <input
+              type="url"
+              name="avatar"
+              class="modal__input modal__input_avatar"
+              placeholder="Name"
+              id="Avatar Url"
+              required
+            />
+            <span class="modal__error" id="profile-avatar-input-error"></span>
+          </label>
+          <button
+            class="modal__button modal__button_disabled"
+            type="submit"
+            disabled
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
     <!--Edit Modal-->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
@@ -128,7 +155,18 @@
         </form>
       </div>
     </div>
-
+    <!--Delete Card Modal------->
+    <div class="modal" id="delete-card-modal">
+      <div class="modal__container">
+        <button class="modal__close" id="modal-close-button"></button>
+        <p class="modal__heading">Confirm to delete</p>
+        <form class="modal__form" id="remove-card-form">
+          <button class="modal__button modal__button_remove" type="submit">
+            Delete
+          </button>
+        </form>
+      </div>
+    </div>
     <!--Preview Image Modal------->
     <div class="modal" id="preview-modal">
       <div class="modal__container modal__container_image">

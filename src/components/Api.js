@@ -59,6 +59,7 @@ export default class Api {
       }); */
   }
 
+  ///creat popup from figma
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
