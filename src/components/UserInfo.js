@@ -1,5 +1,5 @@
 export default class UserInfo {
-  constructor({ nameElement, jobElement }, avatarElement) {
+  constructor({ nameElement, jobElement, avatarElement }) {
     this._nameElement = document.querySelector(nameElement);
     this._jobElement = document.querySelector(jobElement);
     this._avatarElement = document.querySelector(avatarElement);
@@ -9,6 +9,7 @@ export default class UserInfo {
     return {
       name: this._nameElement.textContent.trim(),
       description: this._jobElement.textContent.trim(),
+      avatarUser: this._avatarElement.src,
     };
   }
 

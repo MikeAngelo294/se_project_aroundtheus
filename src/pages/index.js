@@ -14,7 +14,7 @@ import Section from "../components/Section.js";
 
 import UserInfo from "../components/UserInfo.js";
 
-import { initialCards, validationConfig } from "../utils/constants.js";
+import { validationConfig } from "../utils/constants.js";
 
 const cardData = {
   name: "Yosemite Valley",
@@ -89,6 +89,30 @@ const api = new Api({
   },
 });
 
+let section;
+
+api
+  .getAllInfo()
+  .then(([initialCards, userData]) => {
+    userInfo.updateAvatar(userData.avatarUser);
+    userInfo.setUserInfo({
+      name: userData.name,
+      description: userData.about,
+    });
+    section = new Section(
+      {
+        items: initialCards,
+        renderer: renderCard,
+      },
+      ".cards__list"
+    );
+    section.renderItems();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+// log the error to the console
+
 /*                        PopupWithForm                       */
 const profileModal = new PopupWithForm(
   {
@@ -110,6 +134,9 @@ const addModal = new PopupWithForm(
 const popupImage = new PopupWithImage("#preview-modal");
 
 /*                        Section                       */
+//get all info with rendered cards/ refactor with api
+
+/*
 const section = new Section(
   {
     items: initialCards,
@@ -118,15 +145,15 @@ const section = new Section(
   ".cards__list"
 );
 
-//initial cards
+//initial cards from live overview
 api
   .getInitialCards()
   .then((cards) => {
     section.renderItems(cards);
   })
   .catch((err) => {
-    console.error(err); // log the error to the console
-  });
+    console.error(err); 
+  }); */
 
 /*                        UserInfo                       */
 const userInfo = new UserInfo({
@@ -135,12 +162,14 @@ const userInfo = new UserInfo({
   avatarElement: ".profile__image",
 });
 
+////refactor under handle profile edit and apis
+/*
 api.getUserInfo().then((userData) => {
   userInfo.setUserInfo({
     name: userData.name,
     description: userData.about,
   });
-});
+}); */
 
 /*                        component EventListeners                      */
 profileModal.setEventListeners();
@@ -152,14 +181,14 @@ popupImage.setEventListeners();
 /*                        functions                      */
 /* -------------------------------------------------------------------------- */
 
-function renderCard(item, method = "addItem") {
-  const cardElement = createCard(item);
-  section[method](cardElement);
-}
-
 function createCard(cardData) {
   const card = new Card(cardData, "#card-template", handleImageClick);
   return card.getView();
+}
+
+function renderCard(cardData) {
+  const cardElement = createCard(cardData);
+  section.addItem(cardElement);
 }
 
 ///establish handleImageClick///
