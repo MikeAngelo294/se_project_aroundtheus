@@ -1,3 +1,5 @@
+import Api from "../components/Api.js";
+
 import Card from "../components/Card.js";
 
 import "./index.css";
@@ -12,7 +14,7 @@ import Section from "../components/Section.js";
 
 import UserInfo from "../components/UserInfo.js";
 
-import { initialCards, validationConfig } from "../utils/constants.js";
+import { validationConfig } from "../utils/constants.js";
 
 const cardData = {
   name: "Yosemite Valley",
@@ -48,10 +50,15 @@ import {
 
 const addCardForm = document.forms["add-card-form"];
 
+const profileAvatarButton = document.querySelector(".profile__avatar-button");
+
+const avatarEditForm = document.querySelector(".profile-avatar-modal");
+
 /* -------------------------------------------------------------------------- */
 /*                       validation                      */
 /* -------------------------------------------------------------------------- */
-
+//refactor validation, simplify
+/*
 const formValidator = {};
 
 const enableValidation = (validationConfig) => {
@@ -68,21 +75,73 @@ const enableValidation = (validationConfig) => {
     validator.enableValidation();
   });
 };
-enableValidation(validationConfig);
-
+enableValidation(validationConfig); 
 const cardAddValidator = formValidator["add-card-form"];
 const editValidator = formValidator["add-card-form"];
+*/
+
+const cardAddValidator = new FormValidator(config, addCardFormElement);
+cardAddValidator.enableValidation;
+
+const editValidator = new FormValidator(config, profileEditForm);
+editValidator.enableValidation;
+
+const avatarValidator = new FormValidator(config, avatarEditForm);
+avatarValidator.enableValidation;
 
 /* -------------------------------------------------------------------------- */
-/*                        component classes                      */
+/*                        component                       */
 /* -------------------------------------------------------------------------- */
 
+/*                        API                       */
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "a7d09fcd-0691-40bd-af3f-b1a6b438dcbf",
+    "Content-Type": "application/json",
+  },
+});
+
+let section;
+
+api
+  .getAllInfo()
+  .then(([initialCards, userData]) => {
+    userInfo.updateAvatar(userData.avatarUser);
+    userInfo.setUserInfo({
+      name: userData.name,
+      description: userData.about,
+    });
+    section = new Section(
+      {
+        items: initialCards,
+        renderer: renderCard,
+      },
+      ".cards__list"
+    );
+    section.renderItems();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+// log the error to the console
+
+/*                        PopupWithForm with validators                 */
 const profileModal = new PopupWithForm(
   {
     popupSelector: "#profile-edit-modal",
     handleFormSubmit: handleProfileEditSubmit,
   },
   editValidator
+); ///
+
+const profileAvatar = new PopupWithForm(
+  {
+    popupSelector: "#profile-avatar-modal",
+    handleFormSubmit: handleAvatarSubmit,
+  },
+  avatarValidator
 );
 
 const addModal = new PopupWithForm(
@@ -91,10 +150,14 @@ const addModal = new PopupWithForm(
     handleFormSubmit: handleAddCardFormSubmit,
   },
   cardAddValidator
-);
+); //
 
-const popupImage = new PopupWithImage("#preview-modal");
+/*                        PopupWithImage                      */
+const popupImage = new PopupWithImage("#preview-modal"); //
 
+/*                        Section                       */
+
+/*
 const section = new Section(
   {
     items: initialCards,
@@ -103,31 +166,56 @@ const section = new Section(
   ".cards__list"
 );
 
+//initial cards from live overview
+api
+  .getInitialCards()
+  .then((cards) => {
+    section.renderItems(cards);
+  })
+  .catch((err) => {
+    console.error(err); 
+  }); */
+
+/*                        UserInfo                       */
 const userInfo = new UserInfo({
   nameElement: ".profile__title",
   jobElement: ".profile__description",
+  avatarElement: ".profile__image",
 });
 
+////refactor under handle profile edit and apis
+/*
+api.getUserInfo().then((userData) => {
+  userInfo.setUserInfo({
+    name: userData.name,
+    description: userData.about,
+  });
+}); */
+
+/*                        component EventListeners                      */
 profileModal.setEventListeners();
 
 popupImage.setEventListeners();
-section.renderItems();
+//section.renderItems();
+addModal.setEventListeners();
+
+profileAvatar.setEventListeners();
 
 /* -------------------------------------------------------------------------- */
 /*                        functions                      */
 /* -------------------------------------------------------------------------- */
-
-function renderCard(item, method = "addItem") {
-  const cardElement = createCard(item);
-  section[method](cardElement);
-}
 
 function createCard(cardData) {
   const card = new Card(cardData, "#card-template", handleImageClick);
   return card.getView();
 }
 
-///establish handleImageClick
+function renderCard(cardData) {
+  const cardElement = createCard(cardData);
+  section.addItem(cardElement);
+}
+
+///establish handleImageClick///
 function handleImageClick(data) {
   popupImage.open({ name: data.name, link: data.link });
 }
@@ -156,7 +244,7 @@ function handleAddCardFormSubmit(inputValue) {
 /* -------------------------------------------------------------------------- */
 /*                             Event Listeners                      */
 /* -------------------------------------------------------------------------- */
-
+//
 profileEditButton.addEventListener("click", () => {
   const { name, description } = userInfo.getUserInfo();
   profileTitleInput.value = name;
@@ -164,9 +252,11 @@ profileEditButton.addEventListener("click", () => {
   profileModal.open();
 });
 
-//add new card listener button
+//add new card listener button//
 addNewCardButton.addEventListener("click", () => {
   addModal.open();
 });
 
-addModal.setEventListeners();
+profileAvatarButton.addEventListener("click", () => {
+  profileAvatar.open();
+});
