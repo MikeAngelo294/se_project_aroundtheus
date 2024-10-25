@@ -80,14 +80,17 @@ const cardAddValidator = formValidator["add-card-form"];
 const editValidator = formValidator["add-card-form"];
 */
 
-const cardAddValidator = new FormValidator(config, addCardFormElement);
+const cardAddValidator = new FormValidator(
+  validationConfig,
+  addCardFormElement
+);
 cardAddValidator.enableValidation;
 
-const editValidator = new FormValidator(config, profileEditForm);
+const editValidator = new FormValidator(validationConfig, profileEditForm);
 editValidator.enableValidation;
 
-const avatarValidator = new FormValidator(config, avatarEditForm);
-avatarValidator.enableValidation;
+//const avatarValidator = new FormValidator(validationConfig, avatarEditForm);
+//avatarValidator.enableValidation;
 
 /* -------------------------------------------------------------------------- */
 /*                        component                       */
@@ -135,7 +138,7 @@ const profileModal = new PopupWithForm(
   },
   editValidator
 ); ///
-
+/*
 const profileAvatar = new PopupWithForm(
   {
     popupSelector: "#profile-avatar-modal",
@@ -143,7 +146,7 @@ const profileAvatar = new PopupWithForm(
   },
   avatarValidator
 );
-
+*/
 const addModal = new PopupWithForm(
   {
     popupSelector: "#add-card-modal",
@@ -199,7 +202,7 @@ popupImage.setEventListeners();
 //section.renderItems();
 addModal.setEventListeners();
 
-profileAvatar.setEventListeners();
+//profileAvatar.setEventListeners();
 
 /* -------------------------------------------------------------------------- */
 /*                        functions                      */
