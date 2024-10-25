@@ -7,7 +7,7 @@ export default class Api {
 
   _handleResponse(res) {
     if (res.ok) {
-      return res.json; //server response
+      return res.json(); //server response
     }
     return Promise.reject(`Error ${res.status}`); //rejects promise to servor if error
   }

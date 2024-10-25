@@ -50,10 +50,15 @@ import {
 
 const addCardForm = document.forms["add-card-form"];
 
+const profileAvatarButton = document.querySelector(".profile__avatar-button");
+
+const avatarEditForm = document.querySelector(".profile-avatar-modal");
+
 /* -------------------------------------------------------------------------- */
 /*                       validation                      */
 /* -------------------------------------------------------------------------- */
-
+//refactor validation, simplify
+/*
 const formValidator = {};
 
 const enableValidation = (validationConfig) => {
@@ -70,10 +75,19 @@ const enableValidation = (validationConfig) => {
     validator.enableValidation();
   });
 };
-enableValidation(validationConfig);
-
+enableValidation(validationConfig); 
 const cardAddValidator = formValidator["add-card-form"];
 const editValidator = formValidator["add-card-form"];
+*/
+
+const cardAddValidator = new FormValidator(config, addCardFormElement);
+cardAddValidator.enableValidation;
+
+const editValidator = new FormValidator(config, profileEditForm);
+editValidator.enableValidation;
+
+const avatarValidator = new FormValidator(config, avatarEditForm);
+avatarValidator.enableValidation;
 
 /* -------------------------------------------------------------------------- */
 /*                        component                       */
@@ -113,13 +127,21 @@ api
   });
 // log the error to the console
 
-/*                        PopupWithForm                       */
+/*                        PopupWithForm with validators                 */
 const profileModal = new PopupWithForm(
   {
     popupSelector: "#profile-edit-modal",
     handleFormSubmit: handleProfileEditSubmit,
   },
   editValidator
+); ///
+
+const profileAvatar = new PopupWithForm(
+  {
+    popupSelector: "#profile-avatar-modal",
+    handleFormSubmit: handleAvatarSubmit,
+  },
+  avatarValidator
 );
 
 const addModal = new PopupWithForm(
@@ -128,13 +150,12 @@ const addModal = new PopupWithForm(
     handleFormSubmit: handleAddCardFormSubmit,
   },
   cardAddValidator
-);
+); //
 
 /*                        PopupWithImage                      */
-const popupImage = new PopupWithImage("#preview-modal");
+const popupImage = new PopupWithImage("#preview-modal"); //
 
 /*                        Section                       */
-//get all info with rendered cards/ refactor with api
 
 /*
 const section = new Section(
@@ -176,6 +197,9 @@ profileModal.setEventListeners();
 
 popupImage.setEventListeners();
 //section.renderItems();
+addModal.setEventListeners();
+
+profileAvatar.setEventListeners();
 
 /* -------------------------------------------------------------------------- */
 /*                        functions                      */
@@ -220,7 +244,7 @@ function handleAddCardFormSubmit(inputValue) {
 /* -------------------------------------------------------------------------- */
 /*                             Event Listeners                      */
 /* -------------------------------------------------------------------------- */
-
+//
 profileEditButton.addEventListener("click", () => {
   const { name, description } = userInfo.getUserInfo();
   profileTitleInput.value = name;
@@ -228,9 +252,11 @@ profileEditButton.addEventListener("click", () => {
   profileModal.open();
 });
 
-//add new card listener button
+//add new card listener button//
 addNewCardButton.addEventListener("click", () => {
   addModal.open();
 });
 
-addModal.setEventListeners();
+profileAvatarButton.addEventListener("click", () => {
+  profileAvatar.open();
+});
