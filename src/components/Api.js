@@ -16,25 +16,25 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     }).then(this._handleResponse);
-    /*.then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-      */
+    //.then((result) => {
+    //  console.log(result);
+    //})
+    //.catch((err) => {
+    //  console.log(err);
+    //});
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
       headers: this._headers,
     }).then(this._handleResponse);
-    /*.then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      }); */
+    //.then((result) => {
+    //console.log(result);
+    //})
+    //.catch((err) => {
+    // console.log(err);
+    //});
   }
 
   getAllInfo() {
@@ -42,44 +42,65 @@ export default class Api {
   }
 
   ///post cards
-  addCard({ name, link }) {
-    return fetch(`${this._baseUrl}/users/cards`, {
+  addCard({ name, link, _id }) {
+    return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name,
         link,
+        _id,
       }),
-    }).then(this._handleResponse);
-    /*.then((result) => {
+    }) //.then(this._handleResponse);
+      .then((result) => {
         console.log(result);
       })
       .catch((err) => {
         console.log(err);
-      }); */
+      });
   }
 
   ///creat popup from figma
-  deleteCard(id) {
-    return fetch(`${this._baseUrl}/cards/${id}`, {
+  deleteCard(Id) {
+    return fetch(`${this._baseUrl}/cards/${Id}`, {
       method: "DELETE",
       headers: this._headers,
-      body: JSON.stringify(url),
     }).then(this._handleResponse);
+    /*
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });*/
   }
 
-  likeCard(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+  likeCard(Id) {
+    return fetch(`${this._baseUrl}/cards/${Id}/likes`, {
       method: "PUT",
       headers: this._headers,
     }).then(this._handleResponse);
+    /*
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });*/
   }
 
-  unlikeCard(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+  unlikeCard(Id) {
+    return fetch(`${this._baseUrl}/cards/${Id}/likes`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._handleResponse);
+    /*
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });*/
   }
 
   updateUserInfo(userData) {
@@ -91,19 +112,27 @@ export default class Api {
         about: userData.description,
       }),
     }).then(this._handleResponse);
-    /*.then((result) => {
+    /*
+      .then((result) => {
         console.log(result);
       })
       .catch((err) => {
         console.log(err);
-      }); */
+      });*/
   }
 
-  updateAvatar(url) {
+  updateAvatar(link) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify(url),
+      body: JSON.stringify(link),
     }).then(this._handleResponse);
+    /*
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });*/
   }
 }

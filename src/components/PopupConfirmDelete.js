@@ -7,32 +7,32 @@ export default class PopupConfirmDelete extends Popup {
     this._card = null;
     this._cardId = null;
 
-    this._cardDeleteButton = this._popupElement.querySelector(
+    this._deleteCardButton = this._popupElement.querySelector(
       ".modal__button_remove"
     );
-    this._submitDelete = false;
+    this._submit = false;
   }
 
   open(card, cardId) {
-    super.open();
     this._card = card;
     this._cardId = cardId;
+    super.open();
   }
 
-  submitDelete() {
-    return this._submitDelete;
+  getSubmit() {
+    return this._submit;
   }
 
-  confirmDelete(api) {
-    this._handleFormSubmit = api;
+  confirmDelete(callback) {
+    this._handleFormSubmit = callback;
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._cardDeleteButton.addEventListener("click", (event) => {
+    this._deleteCardButton.addEventListener("click", (event) => {
       event.preventDefault();
-      this._submitDelete = true;
-      this._handleFormSubmit(this._cardId, this._card);
+      this._submit = true;
+      this._handleFormSubmit(this._card, this._cardId);
     });
   }
 }

@@ -21,7 +21,7 @@
         <section class="profile page__section">
           <div class="profile__avatar-container">
             <img
-              src="<%=require('./images/jacques-cousteau.png')%>"
+              src="<%=require('./images/Vector.svg')%>"
               alt="Edit Avatar"
               class="profile__avatar-button"
             />
@@ -140,7 +140,7 @@
           <label class="modal__label">
             <input
               type="url"
-              name="url"
+              name="link"
               class="modal__input modal__input_type_url"
               placeholder="Image URL"
               id="card-url-input"
@@ -163,7 +163,11 @@
       <div class="modal__container">
         <button class="modal__close" id="modal-close-button"></button>
         <p class="modal__heading">Confirm to delete</p>
-        <form class="modal__form" id="remove-card-form">
+        <form
+          class="modal__form modal__form_delete"
+          id="remove-card-form"
+          style="margin: 10px"
+        >
           <button class="modal__button modal__button_remove" type="submit">
             Delete
           </button>

@@ -7,7 +7,9 @@ class FormValidator {
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
-    this._submitButton = this._form.querySelector(this._submitButtonSelector);
+    this._submitButton = this._form.querySelectorAll(
+      this._submitButtonSelector
+    );
     this._inputListing = [...this._form.querySelectorAll(this._inputSelector)];
   }
 
@@ -38,13 +40,13 @@ class FormValidator {
 
   toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._disableSubmitButton();
+      this.disableSubmitButton();
       return;
     }
     this._enableSubmitButton();
   }
 
-  _disableSubmitButton() {
+  disableSubmitButton() {
     this._submitButton.classList.add(this._inactiveButtonClass);
     this._submitButton.disabled = true;
   }
@@ -66,7 +68,7 @@ class FormValidator {
   enableValidation() {
     this._form.addEventListener("submit", (event) => {
       event.preventDefault();
-      this._disableSubmitButton();
+      this.disableSubmitButton();
     });
     this._setEventListeners();
   }
