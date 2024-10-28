@@ -63,20 +63,20 @@ export default class Card {
     // .classList.toggle("card__like-button_active");
     this._likeButton.classList.toggle("card__like-button_active");
   }
-
+  /*
   _getTemplate() {
     return document
       .querySelector(this._cardSelector)
       .content.querySelector(".card")
       .cloneNode(true);
-  }
+  }*/
 
   getView() {
-    //this._cardElement = document
-    // .querySelector(this._cardSelector)
-    //.content.querySelector(".card")
-    //.cloneNode(true);
-    this._cardElement = this._getTemplate();
+    this._cardElement = document
+      .querySelector(this._cardSelector)
+      .content.querySelector(".card")
+      .cloneNode(true);
+    //this._cardElement = this._getTemplate();
     //likebutton
     this._likeButton = this._cardElement.querySelector(".card__like-button");
     //card delete button

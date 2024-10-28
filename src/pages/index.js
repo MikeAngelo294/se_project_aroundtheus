@@ -66,13 +66,13 @@ const cardAddValidator = new FormValidator(
   validationConfig,
   addCardFormElement
 );
-cardAddValidator.enableValidation;
+cardAddValidator.enableValidation();
 
 const editValidator = new FormValidator(validationConfig, profileEditForm);
-editValidator.enableValidation;
+editValidator.enableValidation();
 
 const avatarValidator = new FormValidator(validationConfig, avatarEditForm);
-avatarValidator.enableValidation;
+avatarValidator.enableValidation();
 
 /* -------------------------------------------------------------------------- */
 /*                        component                       */
@@ -224,7 +224,7 @@ function handleProfileEditSubmit(userData) {
     .updateUserInfo(userData)
     .then((res) => {
       userInfo.setUserInfo({
-        name: res.title,
+        name: res.name,
         description: res.about,
       });
       profileModal.close();
@@ -252,20 +252,21 @@ function handleAddCardFormSubmit(inputValue) {
 
 function handleAddCardFormSubmit(data) {
   addModal.renderLoad(true);
-  api.addCard({
-    name: data.title,
-    link: data.url,
-    _id: data.id,
-    isLiked: data.isLiked,
-  });
-  then((cardData) => {
-    renderCard(cardData);
-    addModal.close();
-    addCardForm.reset();
-    cardAddValidator.disableSubmitButton();
-  })
+  api
+    .addCard({
+      name: data.title,
+      link: data.url,
+      _id: data.id,
+      isLiked: data.isLiked,
+    })
+    .then((cardData) => {
+      renderCard(cardData);
+      addModal.close();
+      addCardForm.reset();
+      cardAddValidator.disableSubmitButton();
+    })
     .catch((err) => {
-      console.error("can't add card error", err);
+      console.error(err);
     })
     .finally(() => {
       addModal.renderLoad(false);
@@ -332,9 +333,9 @@ function handleAvatarSubmit(link) {
 /* -------------------------------------------------------------------------- */
 //
 profileEditButton.addEventListener("click", () => {
-  const { name, description } = userInfo.getUserInfo();
-  profileTitleInput.value = name;
-  profileDescriptionInput.value = description;
+  const data = userInfo.getUserInfo();
+  profileTitleInput.value = data.name;
+  profileDescriptionInput.value = data.description;
   profileModal.open();
 });
 
