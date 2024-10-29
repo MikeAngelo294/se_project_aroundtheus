@@ -83,7 +83,7 @@ avatarValidator.enableValidation();
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "170100d1-8351-4f5b-bf2d-4cb020590866",
+    authorization: "2e15443f-b985-4091-b83c-126da614c5d5",
     "Content-Type": "application/json",
   },
 });
@@ -198,9 +198,9 @@ function createCard(cardData) {
   return card.getView();
 }
 
-function renderCard(cardData) {
-  const cardElement = createCard(cardData);
-  section.addItem(cardElement);
+function renderCard(item, method = "addItem") {
+  const cardElement = createCard(item);
+  section[method](cardElement);
 }
 
 ///establish handleImageClick///
@@ -254,8 +254,8 @@ function handleAddCardFormSubmit(data) {
   addModal.renderLoad(true);
   api
     .addCard({
-      name: data.title,
-      link: data.url,
+      name: data.name,
+      link: data.link,
       _id: data.id,
       isLiked: data.isLiked,
     })

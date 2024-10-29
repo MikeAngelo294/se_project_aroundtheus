@@ -26,7 +26,7 @@ export default class Api {
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: "GET",
+      //method: "GET",
       headers: this._headers,
     }).then(this._handleResponse);
     //.then((result) => {
@@ -51,13 +51,13 @@ export default class Api {
         link,
         _id,
       }),
-    }) //.then(this._handleResponse);
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._handleResponse);
+    //.then((result) => {
+    // console.log(result);
+    //})
+    //.catch((err) => {
+    // console.log(err);
+    //});
   }
 
   ///creat popup from figma

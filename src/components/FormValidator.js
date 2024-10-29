@@ -11,7 +11,7 @@ class FormValidator {
     this._inputListing = [...this._form.querySelectorAll(this._inputSelector)];
   }
 
-  _showInputError(inputEl, validationMessage) {
+  _showInputError(inputEl) {
     const errorMessageEl = this._form.querySelector(`#${inputEl.id}-error`);
     inputEl.classList.add(this._inputErrorClass);
     errorMessageEl.textContent = inputEl.validationMessage;

@@ -23,7 +23,7 @@ export default class Card {
     });
     //".card__delete-button"
     this._deleteButton.addEventListener("click", () => {
-      this.handleDeleteCard(this.id, this);
+      this.handleDeleteCard(this);
     });
     //".card__image"
     this._cardImage.addEventListener("click", () => {
