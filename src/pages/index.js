@@ -83,7 +83,7 @@ avatarValidator.enableValidation();
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "dc15066d-1822-4e6e-81d7-4b6849a25644",
+    authorization: "d5a3e5a4-85ea-4fc2-8d19-e21eb743542a",
     "Content-Type": "application/json",
   },
 });
@@ -145,32 +145,12 @@ const addModal = new PopupWithForm(
 /*                        PopupWithImage                      */
 const popupImage = new PopupWithImage("#preview-modal"); //
 
-//initial cards from live overview
-/*
-api
-  .getInitialCards()
-  .then((cards) => {
-    section.renderItems(cards);
-  })
-  .catch((err) => {
-    console.error(err);
-  }); */
-
 /*                        UserInfo                       */
 const userInfo = new UserInfo({
   nameElement: ".profile__title",
   jobElement: ".profile__description",
   avatarElement: ".profile__image",
 });
-
-////refactor under handle profile edit and apis
-/*
-api.getUserInfo().then((userData) => {
-  userInfo.setUserInfo({
-    name: userData.name,
-    description: userData.about,
-  });
-}); */
 
 /*                        component EventListeners                      */
 profileModal.setEventListeners();
@@ -208,16 +188,6 @@ function handleImageClick(data) {
   popupImage.open({ name: data.name, link: data.link });
 }
 
-//// use userInfo for handlesubmit
-/*
-function handleProfileEditSubmit(inputValue) {
-  userInfo.setUserInfo({
-    name: inputValue.title,
-    description: inputValue.description,
-  });
-  profileModal.close();
-} */
-
 function handleProfileEditSubmit(userData) {
   profileModal.renderLoad(true);
   api
@@ -236,19 +206,6 @@ function handleProfileEditSubmit(userData) {
       profileModal.renderLoad(false);
     });
 }
-
-/*
-function handleAddCardFormSubmit(inputValue) {
-  const cardData = {
-    name: inputValue.title,
-    link: inputValue.url,
-  };
-
-  renderCard(cardData);
-  //cardAddValidator.disableSubmitButton();
-  addModal.close();
-  addCardForm.reset();
-} */
 
 function handleAddCardFormSubmit(data) {
   addModal.renderLoad(true);
@@ -324,7 +281,7 @@ function handleAvatarSubmit(link) {
       console.error(err);
     })
     .finally(() => {
-      addModal.renderLoad(false);
+      profileAvatar.renderLoad(false);
     });
 }
 
