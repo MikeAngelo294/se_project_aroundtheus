@@ -55,7 +55,9 @@ const addCardForm = document.forms["add-card-form"];
 
 const profileAvatarButton = document.querySelector(".profile__avatar-button");
 
-const avatarEditForm = document.querySelector(".modal__form");
+//const avatarEditForm = document.querySelector(".modal__form");
+
+const avatarEditForm = document.forms["profile-avatar-modal"];
 
 /* -------------------------------------------------------------------------- */
 /*                       validation                      */
