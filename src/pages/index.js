@@ -85,7 +85,7 @@ avatarValidator.enableValidation();
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "d5a3e5a4-85ea-4fc2-8d19-e21eb743542a",
+    authorization: "885070a3-3312-41e0-a16d-1c8af1c13c4f",
     "Content-Type": "application/json",
   },
 });
