@@ -11,7 +11,7 @@ class FormValidator {
     this._inputListing = [...this._form.querySelectorAll(this._inputSelector)];
   }
 
-  _showInputError(inputEl, validationMessage) {
+  _showInputError(inputEl) {
     const errorMessageEl = this._form.querySelector(`#${inputEl.id}-error`);
     inputEl.classList.add(this._inputErrorClass);
     errorMessageEl.textContent = inputEl.validationMessage;
@@ -38,13 +38,13 @@ class FormValidator {
 
   toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._disableSubmitButton();
+      this.disableSubmitButton();
       return;
     }
     this._enableSubmitButton();
   }
 
-  _disableSubmitButton() {
+  disableSubmitButton() {
     this._submitButton.classList.add(this._inactiveButtonClass);
     this._submitButton.disabled = true;
   }
@@ -66,7 +66,7 @@ class FormValidator {
   enableValidation() {
     this._form.addEventListener("submit", (event) => {
       event.preventDefault();
-      this._disableSubmitButton();
+      //this.disableSubmitButton();
     });
     this._setEventListeners();
   }

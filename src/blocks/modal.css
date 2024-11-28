@@ -170,6 +170,14 @@
   margin-bottom: 0;
 }
 
+#modal-heading-delete {
+  width: 358px;
+}
+
+#modal-remove-card-form {
+  margin-top: 10px;
+}
+
 @media screen and (max-width: 720px) {
   .modal__container {
     padding: 25px 22px;
@@ -195,6 +203,11 @@
     font-size: 18px;
     line-height: 22px;
     margin-bottom: 75px;
+  }
+
+  #modal-heading-delete {
+    width: 200px;
+    margin: 0px;
   }
 
   .modal__input {
